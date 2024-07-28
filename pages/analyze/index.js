@@ -70,6 +70,7 @@ const Analyze = () => {
 
   const handleRemoveItem = (index) => {
     setGetFetchedData(getFetchedData.filter((_, i) => i !== index));
+    setListData(listData.filter((_, i) => i !== index));
   }
 
   const maxValue = Math.max(...listData.flatMap(d => [ d.videoTotalCount, d.subscriberTotalCount]));
