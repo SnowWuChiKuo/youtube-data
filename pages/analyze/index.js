@@ -9,6 +9,11 @@ const Analyze = () => {
   const { selectedItems } = useContext(DataContext);
   const [ getFetchedData, setGetFetchedData ] = useState([]);
   const [ listData, setListData ] = useState([]);
+  const [visibleBars, setVisibleBars] = useState({
+    videoTotalCount: true,
+    subscriberTotalCount: true,
+    viewTotalCount: true,
+  });
   
   const parseItems = selectedItems.map(item => ({
     channelId: item.id.channelId,
@@ -73,11 +78,50 @@ const Analyze = () => {
     setListData(listData.filter((_, i) => i !== index));
   }
 
-  const maxValue = Math.max(...listData.flatMap(d => [ d.videoTotalCount, d.subscriberTotalCount]));
+  const handleBarVisibilityChange = (bar) => {
+    setVisibleBars({
+      ...visibleBars,
+      [bar]: !visibleBars[bar],
+    })
+  }
+
+  const maxValue = Math.max(
+    ...listData.flatMap(d => [
+      visibleBars.videoTotalCount ? d.videoTotalCount : 0,
+      visibleBars.subscriberTotalCount ? d.subscriberTotalCount : 0,
+      visibleBars.viewTotalCount ? d.viewTotalCount : 0,
+    ])
+  );
 
   return (
     <div className="text-white mt-28 col-span-4 grid grid-rows-10">
       {isLoading && <div>Loading...</div>}
+      <div className="row-span-1 flex justify-center">
+        <label>
+          <input
+            type="checkbox"
+            checked={visibleBars.videoTotalCount}
+            onChange={() => handleBarVisibilityChange('videoTotalCount')}
+          />
+          Video Total Count
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={visibleBars.subscriberTotalCount}
+            onChange={() => handleBarVisibilityChange('subscriberTotalCount')}
+          />
+          Subscriber Total Count
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={visibleBars.viewTotalCount}
+            onChange={() => handleBarVisibilityChange('viewTotalCount')}
+          />
+          View Total Count
+        </label>
+      </div>
       <div className="row-span-8">
         <div className="flex justify-center items-center">
           <BarChart width={730} height={850} data={listData}>
@@ -86,9 +130,9 @@ const Analyze = () => {
             <YAxis interval="preserveStartEnd" domain={[0, maxValue]} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="videoTotalCount" fill="#8884d8" />
-            <Bar dataKey="subscriberTotalCount" fill="#E98B2A" />
-            <Bar dataKey="viewTotalCount" fill="#82ca9d" />
+            {visibleBars.videoTotalCount && <Bar dataKey="videoTotalCount" fill="#8884d8" />}
+            {visibleBars.subscriberTotalCount && <Bar dataKey="subscriberTotalCount" fill="#E98B2A" />}
+            {visibleBars.viewTotalCount && <Bar dataKey="viewTotalCount" fill="#82ca9d" />}
           </BarChart>
         </div>
       </div>
