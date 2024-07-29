@@ -1,8 +1,7 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 
 export default function SearchApi({ data, onAddItem }) {
-  console.log('data: ', data);
   if (!data) {
     return <div>Loading...</div>
   }

@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function Data() {
-
   return (
     <div className="flex justify-center box-border w-60 h-lvh">
       <ul className="text-white pt-20">

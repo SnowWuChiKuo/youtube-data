@@ -68,7 +68,6 @@ const Analyze = () => {
       console.error('Error fetching data:', error);
     }
   }
-  console.log('listData: ', listData);
   const { error, isLoading, refetch } = useQuery({ queryKey: ['getData'], queryFn: handleGet, enabled: true })
 
   console.log('error', error);

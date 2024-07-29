@@ -10,7 +10,7 @@ import SearchApi from "../components/searchApi";
 export default function Home() {
   const [inputString, setInputString] = useState('');
   const { fetchedData, setFetchedData, selectedItems, setSelectedItems } = useContext(DataContext);
-  const [currentPage, setCurrentPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const handleClick = () => {
@@ -55,8 +55,6 @@ export default function Home() {
 
   const { error, isLoading, refetch } = useQuery({ queryKey:['getData', inputString], queryFn: handleSearch, enabled: false })
 
-  console.log('fD: ', fetchedData);
-
   const handleAddItem = (item) => {
     if (!selectedItems.some(selectedItem => selectedItem.id === item.id)) {
       setSelectedItems([...selectedItems, item]);
@@ -78,8 +76,6 @@ export default function Home() {
       setCurrentPage(currentPage + 1);
     }
   }
-
-  console.log('currentPage: ', currentPage);
 
   // 單頁最後一個數量
   const indexLastItem = currentPage * itemsPerPage;
