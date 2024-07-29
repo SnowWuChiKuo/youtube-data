@@ -56,8 +56,10 @@ export default function Home() {
   const { error, isLoading, refetch } = useQuery({ queryKey:['getData', inputString], queryFn: handleSearch, enabled: false })
 
   const handleAddItem = (item) => {
-    if (!selectedItems.some(selectedItem => selectedItem.id === item.id)) {
-      setSelectedItems([...selectedItems, item]);
+    if (selectedItems.length >= 5) {
+      alert("不可超過五個項目");
+    } else if (!selectedItems.some(selectedItem => selectedItem.id === item.id)) {
+        setSelectedItems([...selectedItems, item]);
     }
   };
 

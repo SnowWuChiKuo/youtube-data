@@ -16,10 +16,8 @@ const Analyze = () => {
   });
   
   const parseItems = selectedItems.map(item => ({
-    channelId: item.id.channelId,
+    channelId: item.channelId,
   }));
-
-  console.log('parseItems: ', parseItems);
   
   const handleGet = async () => {
     try {
