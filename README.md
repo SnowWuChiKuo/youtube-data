@@ -1,40 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 介紹
+- 這是簡易影片數據觀看網頁。  
+- 使用 Nextjs 框架，CSS部分使用 tailwind 進行修飾，串接API的部分是使用 rect-query 套件，數據圖顯示部分是使用 recharts 套件，部屬在 Vercel。  
+- 使用者在此專案可以進行搜尋youtube的頻道，搜尋資料最多只有50筆分了10頁，可以讓使用者挑選想比對數據的頻道，頻道可以按下儲存或著在儲存列可以刪除，數據分析頁滑鼠移到各個頻道的長條圖可以看到三種數據的數值，分別是頻道影片總數、頻道訂閱總數、頻道總觀看數，並在上方可以挑選你要觀看的數據，若選錯頻道也可以在下方的儲存列進行移除。  
+- 本專案是前端開發之專案。  
 
-## Getting Started
+## 產品功能
+1. 使用者可以搜尋youtube頻道。  
+2. 使用者可以把youtube頻道加入到儲存列，在儲存列中可以刪除頻道。  
+3. 使用者可以在數據分析頁面觀看儲存列的數據，分別是頻道影片總數、頻道訂閱總數、頻道總觀看數。    
+4. 使用者可以在數據分析頁面的長條圖上方選擇要看的數據。  
+5. 使用者可以在數據分析頁面刪除儲存列的頻道，長條圖也會跟著改變。  
 
-First, run the development server:
+## 專案開發人員
+[Snow](https://github.com/SnowWuChiKuo)  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 部屬  
+[vercel](https://youtube-data-murex.vercel.app/)  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 專案本地安裝流程
+1. 請確認電腦已經安裝 Node.js、npm  
+2. 打開終端機，輸入以下指令將專案 clone 到本地  
+   ```
+   git clone https://github.com/SnowWuChiKuo/youtube-data
+   ```
+3. 終端機移動至專案資料夾，輸入指令安裝套件  
+   ```
+   cd 專案資料夾  
+   npm install
+   ```
+4. 新增.env檔案，根據.env.example補足所需變數設定  
+   ```
+   NEXT_PUBLIC_YOUTUBE_KEY=
+   ```
+5. 啟動前端 
+   ```
+   npm run dev 
+   ```
+6. 若跑出以下字串代表運行成功  
+   ```
+   http://localhost:3000  
+   ```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 前端開發工具
+tanstack/react-query: v5.50.1  
+next: v14.2.4  
+react: v18  
+react-dom: v18  
+react-router-dom: v6.25.0  
+recharts: v2.12.7  
+eslint: v8  
+eslint-config-next: v14.2.4  
+postcss: v8  
+tailwindcss: v3.4.1  
