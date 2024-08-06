@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Data from "../components/data";
-import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { DataProvider } from "../context/DataContext";
 
@@ -15,8 +14,8 @@ export default function Layout({ children }) {
     <DataProvider>
       <div className='md:h-full md:w-auto'>
         <Navbar />
-        <div className="grid grid-cols-5 gap-5">
-          <div className="col-span-5 md:col-span-1">
+        <div className="grid grid-cols-5">
+          <div className="col-span-4 md:col-span-1">
             <button 
               className="md:hidden p-2 bg-gray-700 text-white rounded"
               onClick={toggleDataVisibility}
@@ -27,11 +26,10 @@ export default function Layout({ children }) {
               <Data />
             </div>
           </div>
-          <div className="col-span-5 md:col-span-4">
+          <div className="col-span-4 md:col-span-4">
             {children}
           </div>
         </div>
-        <Footer />
       </div>
     </DataProvider>
   );

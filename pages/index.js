@@ -87,14 +87,14 @@ export default function Home() {
   const currentItems = fetchedData?.slice(indexFirstItem, indexLastItem);
 
   return (
-      <div className="col-span-4 grid grid-rows-10">
+      <div className="col-span-4 grid grid-rows-9">
         <main className="row-span-8">
           <>
             <Search handleClick={handleClick} handleInput={handleInput} />
             {isLoading && <div>Loading...</div>}
             {error && <div>Error: {error.message}</div>}
           </>
-          <div className="text-white">
+          <div className="text-white border-b-2 border-gray-600 mx-5 mt-5">
             <ul className="grid grid-cols-3">
               <li className="flex justify-center items-center p-5 text-xl">
                 頻道圖像
@@ -108,25 +108,29 @@ export default function Home() {
             </ul>
           </div>
           <SearchApi data={currentItems} onAddItem={handleAddItem} />
-          {fetchedData && <div className="flex justify-center text-center ">
-            <button 
-              className="bg-amber-400 text-black rounded-full p-3 mr-5 hover:bg-blue-500"
-              onClick={handlePreviousPage}
-              disabled={currentPage === 1}
-            >
-              上一頁
-            </button>
-            <p className="bg-amber-400 text-black rounded-full p-3 mr-5">{currentPage}</p>
-            <button 
-              className="bg-amber-400 text-black rounded-full p-3 mr-5 hover:bg-blue-500"
-              onClick={handleNextPage}
-              disabled={currentPage === Math.ceil(fetchedData.length / itemsPerPage)}
+          <div className="mt-7">
+            {fetchedData && <div className="flex justify-center text-center ">
+              <button 
+                className="bg-amber-400 text-black rounded-full p-3 mr-5 hover:bg-blue-500"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
               >
-                下一頁
-            </button>
-          </div>}
+                &lt;
+              </button>
+              <p className="bg-amber-400 text-black rounded-full p-3 mr-5">{currentPage}</p>
+              <button 
+                className="bg-amber-400 text-black rounded-full p-3 mr-5 hover:bg-blue-500"
+                onClick={handleNextPage}
+                disabled={currentPage === Math.ceil(fetchedData.length / itemsPerPage)}
+                >
+                  &gt;
+              </button>
+            </div>}
+          </div>
         </main>
-        <Release items={selectedItems} onRemoveItem={handleRemoveItem} />
+        <div className="mt-6">
+          <Release items={selectedItems} onRemoveItem={handleRemoveItem} />
+        </div>
       </div>
   );
 }

@@ -12,7 +12,7 @@ export default function Release({ items, onRemoveItem }) {
         <div key={index} className="relative inline-block">
           <Image
             src={item.thumbnails}
-            className="rounded-full hover:scale-125"
+            className="rounded-full"
             height={80}
             width={80}
             alt="picture"

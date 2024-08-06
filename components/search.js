@@ -3,11 +3,11 @@ function Search({ inputString, handleClick, handleInput }) {
   return (
     <div className="flex justify-center items-center">
       <input type="text" 
-            className="border border-white rounded-l-lg text-white text-2xl py-1"
+            className="border border-white rounded-l-lg text-white text-2xl p-1"
             onChange={handleInput}
             value={inputString} />
       <button 
-            className="border border-white rounded-r-lg text-2xl text-blue-200 px-5 py-1" 
+            className="border border-white rounded-r-lg text-2xl bg-green-300 px-5 py-1 hover:bg-green-500" 
             onClick={handleClick}>
         Search
       </button>
