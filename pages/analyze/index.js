@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Release from "@/components/release";
 import DataContext from '@/context/DataContext';
 import PieChart from "@/components/PieChart";
+import {Chart, ArcElement, Tooltip, Legend} from 'chart.js'
 
 
 const Analyze = () => {
@@ -82,11 +83,14 @@ const Analyze = () => {
     })
   }
 
+  Chart.register(ArcElement, Tooltip, Legend);
+
   const subscriberData = {
     labels: listData.map(item => item.title),
     label: '訂閱總數',
+    data: listData.map(item => item.subscriberTotalCount),
     datasets: [{
-      label: 'My First Dataset',
+      label: '訂閱總數',
       data: listData.map(item => item.subscriberTotalCount),
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -102,8 +106,9 @@ const Analyze = () => {
   const videoCountData = {
     labels: listData.map(item => item.title),
     label: '影片總量',
+    data: listData.map(item => item.videoTotalCount),
     datasets: [{
-      label: 'My First Dataset',
+      label: '影片總量',
       data: listData.map(item => item.videoTotalCount),
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -119,8 +124,9 @@ const Analyze = () => {
   const viewCountData = {
     labels: listData.map(item => item.title),
     label: '觀看總數',
+    data: listData.map(item => item.viewTotalCount),
     datasets: [{
-      label: 'My First Dataset',
+      label: '觀看總數',
       data: listData.map(item => item.viewTotalCount),
       backgroundColor: [
         'rgb(255, 99, 132)',
@@ -134,16 +140,18 @@ const Analyze = () => {
   };
 
   return (
-    <div className="text-white mt-28 col-span-4 grid grid-rows-10">
+    <div className="text-white mt-28 col-span-4 grid grid-rows-6">
       {isLoading && <div>Loading...</div>}
-      <div className="row-span-8">
+      <div className="row-span-5">
         <div className="flex justify-center items-center">
           <PieChart data={subscriberData} />
           <PieChart data={videoCountData} />
           <PieChart data={viewCountData} />
         </div>
       </div>
-      <Release items={getFetchedData} onRemoveItem={handleRemoveItem} />
+      <div className="mt-7">
+        <Release items={getFetchedData} onRemoveItem={handleRemoveItem} />
+      </div>
     </div>
   );
 }

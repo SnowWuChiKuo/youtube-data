@@ -87,14 +87,14 @@ export default function Home() {
   const currentItems = fetchedData?.slice(indexFirstItem, indexLastItem);
 
   return (
-      <div className="col-span-4 grid grid-rows-9">
+      <div className="col-span-4 grid grid-rows-8">
         <main className="row-span-8">
           <>
             <Search handleClick={handleClick} handleInput={handleInput} />
             {isLoading && <div>Loading...</div>}
             {error && <div>Error: {error.message}</div>}
           </>
-          <div className="text-white border-b-2 border-gray-600 mx-5 mt-5">
+          <div className="text-white border-b-2 border-gray-600 mx-5">
             <ul className="grid grid-cols-3">
               <li className="flex justify-center items-center p-5 text-xl">
                 頻道圖像
@@ -108,7 +108,7 @@ export default function Home() {
             </ul>
           </div>
           <SearchApi data={currentItems} onAddItem={handleAddItem} />
-          <div className="mt-7">
+          <div className="mt-4">
             {fetchedData && <div className="flex justify-center text-center ">
               <button 
                 className="bg-amber-400 text-black rounded-full p-3 mr-5 hover:bg-blue-500"
@@ -128,7 +128,7 @@ export default function Home() {
             </div>}
           </div>
         </main>
-        <div className="mt-6">
+        <div className="mt-5">
           <Release items={selectedItems} onRemoveItem={handleRemoveItem} />
         </div>
       </div>
