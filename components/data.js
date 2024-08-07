@@ -11,7 +11,7 @@ export default function Data() {
         </li>
         <li className="text-black mb-4">
           <Link href="/analyze" className="bg-green-400 flex justify-center w-40 h-12 items-center rounded-full hover:bg-green-600">
-            <button>數據分析</button>
+            <button>數據觀看</button>
           </Link>
         </li>
       </ul>

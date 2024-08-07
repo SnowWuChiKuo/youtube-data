@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useQuery } from '@tanstack/react-query';
 import Release from "@/components/release";
 import DataContext from '@/context/DataContext';
-import { BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import PieChart from "@/components/PieChart";
 
 
 const Analyze = () => {
@@ -82,55 +82,65 @@ const Analyze = () => {
     })
   }
 
-  const maxValue = Math.max(
-    ...listData.flatMap(d => [
-      visibleBars.videoTotalCount ? d.videoTotalCount : 0,
-      visibleBars.subscriberTotalCount ? d.subscriberTotalCount : 0,
-      visibleBars.viewTotalCount ? d.viewTotalCount : 0,
-    ])
-  );
+  const subscriberData = {
+    labels: listData.map(item => item.title),
+    label: '訂閱總數',
+    datasets: [{
+      label: 'My First Dataset',
+      data: listData.map(item => item.subscriberTotalCount),
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(153, 102, 255)',
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const videoCountData = {
+    labels: listData.map(item => item.title),
+    label: '影片總量',
+    datasets: [{
+      label: 'My First Dataset',
+      data: listData.map(item => item.videoTotalCount),
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(153, 102, 255)',
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const viewCountData = {
+    labels: listData.map(item => item.title),
+    label: '觀看總數',
+    datasets: [{
+      label: 'My First Dataset',
+      data: listData.map(item => item.viewTotalCount),
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(153, 102, 255)',
+      ],
+      hoverOffset: 4
+    }]
+  };
 
   return (
     <div className="text-white mt-28 col-span-4 grid grid-rows-10">
       {isLoading && <div>Loading...</div>}
-      <div className="row-span-1 flex justify-center">
-        <label>
-          <input
-            type="checkbox"
-            checked={visibleBars.videoTotalCount}
-            onChange={() => handleBarVisibilityChange('videoTotalCount')}
-          />
-          Video Total Count
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={visibleBars.subscriberTotalCount}
-            onChange={() => handleBarVisibilityChange('subscriberTotalCount')}
-          />
-          Subscriber Total Count
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={visibleBars.viewTotalCount}
-            onChange={() => handleBarVisibilityChange('viewTotalCount')}
-          />
-          View Total Count
-        </label>
-      </div>
       <div className="row-span-8">
         <div className="flex justify-center items-center">
-          <BarChart width={730} height={850} data={listData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="title" />
-            <YAxis interval="preserveStartEnd" domain={[0, maxValue]} />
-            <Tooltip />
-            <Legend />
-            {visibleBars.videoTotalCount && <Bar dataKey="videoTotalCount" fill="#8884d8" />}
-            {visibleBars.subscriberTotalCount && <Bar dataKey="subscriberTotalCount" fill="#E98B2A" />}
-            {visibleBars.viewTotalCount && <Bar dataKey="viewTotalCount" fill="#82ca9d" />}
-          </BarChart>
+          <PieChart data={subscriberData} />
+          <PieChart data={videoCountData} />
+          <PieChart data={viewCountData} />
         </div>
       </div>
       <Release items={getFetchedData} onRemoveItem={handleRemoveItem} />

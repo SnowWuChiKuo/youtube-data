@@ -8,13 +8,13 @@ export default function Navbar() {
       </h1>
       <ul className="flex justify-around items-center">
         <li className="m-4 text-lg">
-          <Link href="/" className="bg-green-300 px-5 py-3 rounded-lg hover:bg-green-500">
+          <Link href="/" className="flex justify-around items-center bg-green-300 px-5 py-3 rounded-lg hover:bg-green-500">
             首頁
           </Link>
         </li>
         <li className="m-4 text-lg">
-          <Link href="/about" className="bg-green-300 px-5 py-3 rounded-lg hover:bg-green-500">
-            About
+          <Link href="/about" className="flex justify-around items-center bg-green-300 px-5 py-3 rounded-lg hover:bg-green-500">
+            關於
           </Link>
         </li>
       </ul>
